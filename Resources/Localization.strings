@@ -1,0 +1,43 @@
+//"general_create" = "&#160;Create&#160;"; // Remove
+"general_continue" = "Continue";
+"general_ok" = "OK";
+"general_close" = "Close";
+
+//"deeplink_host" = "payments";
+"deeplink_scheme" = "mollie-checkout";
+
+//"status_open" = "Open";
+//"status_canceled" = "Canceled";
+//"status_pending" = "Pending";
+//"status_expired" = "Expired";
+//"status_failed" = "Failed";
+//"status_paid" = "Paid";
+
+"payments_title" = "Payments";
+"payments_empty_title" = "Welcome to Mollie Checkout";
+"payments_empty_description" = "To get started, you can create a new payment. Success!";
+"payments_create_new" = "Create payment";
+"payment_status_title" = "Payment status";
+"payment_status_description" = "This payment has the status %s.";
+"payments_checkout_select_flow_title" = "Select flow";
+"payments_checkout_select_flow_description" = "Which browser flow would you like to use for checking out this payment?";
+"payments_checkout_select_flow_external_browser" = "External (recommended)";
+"payments_checkout_select_flow_in_app_browser" = "In-app browser";
+
+"create_payment_title" = "Add payment";
+"create_payment_description" = "Specify the payment amount and provide a description.";
+"create_payment_hint_amount" = "Amount";
+"create_payment_hint_description" = "Description";
+
+"create_payment_error_missing_amount_title" = "Missing amount";
+"create_payment_error_missing_amount_body" = "Please fill in an amount.";
+
+"create_payment_error_missing_description_title" = "Missing description";
+"create_payment_error_missing_description_body" = "Please fill in a description.";
+
+//"select_method_empty_title" = "Missing payment methods";
+//"select_method_empty_description" = "No payment methods were found. Please try again.";
+//"select_method_title" = "Select payment method";
+//"select_checkout_method_missing" = "Select a payment method.";
+"select_issuer_title" = "Select issuer";
+"select_method_body" = "Select one of our payment methods.";

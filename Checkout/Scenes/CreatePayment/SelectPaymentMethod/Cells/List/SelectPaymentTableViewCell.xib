@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SelectPaymentTableViewCell" rowHeight="56" id="KGk-i7-Jjw" customClass="SelectPaymentTableViewCell" customModule="Checkout" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TWW-kQ-kP3">
+                        <rect key="frame" x="16" y="16" width="32" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="32" id="OxN-w7-Pii"/>
+                            <constraint firstAttribute="height" constant="27.5" id="XK4-EQ-dK1"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGq-1o-tZk">
+                        <rect key="frame" x="64" y="17.5" width="210" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="EUs-Dc-7Hi">
+                        <rect key="frame" x="288" y="20.5" width="16" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="PbG-8y-z2n"/>
+                            <constraint firstAttribute="width" constant="16" id="fB8-ca-KHW"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="EUs-Dc-7Hi" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="K3y-Ub-ECj"/>
+                    <constraint firstItem="TWW-kQ-kP3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NGg-pB-3lT"/>
+                    <constraint firstItem="PGq-1o-tZk" firstAttribute="leading" secondItem="TWW-kQ-kP3" secondAttribute="trailing" constant="16" id="QaQ-cR-0Eq"/>
+                    <constraint firstAttribute="trailing" secondItem="EUs-Dc-7Hi" secondAttribute="trailing" constant="16" id="Tg7-YL-FhW"/>
+                    <constraint firstItem="EUs-Dc-7Hi" firstAttribute="leading" secondItem="PGq-1o-tZk" secondAttribute="trailing" constant="14" id="c4I-yc-P4J"/>
+                    <constraint firstItem="PGq-1o-tZk" firstAttribute="centerY" secondItem="TWW-kQ-kP3" secondAttribute="centerY" id="eIE-pt-Fnm"/>
+                    <constraint firstItem="TWW-kQ-kP3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gkP-tX-RNq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="iconImageView" destination="TWW-kQ-kP3" id="HO4-5I-T8U"/>
+                <outlet property="stateImageView" destination="EUs-Dc-7Hi" id="9Ow-Fb-8qJ"/>
+                <outlet property="titleLabel" destination="PGq-1o-tZk" id="poq-qb-Xal"/>
+            </connections>
+            <point key="canvasLocation" x="-4.3478260869565224" y="141.96428571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="creditcard.fill" catalog="system" width="128" height="88"/>
+    </resources>
+</document>
