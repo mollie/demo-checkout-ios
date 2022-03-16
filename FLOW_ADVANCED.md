@@ -1,18 +1,35 @@
+# Implementing the advanced flow
+
 <img align="right" src="images/FlowAdvanced.gif" alt="Advanced flow" width="24%" />
 
-# Flow 2: Advanced implementation
+Instead of using an external browser, the advanced implementation executes the payment in an in-app browser. This enables you to style the payment flow so that it matches your app’s theme.
 
-The advanced implementation makes use of a WKWebView to handle the payments in-app.
+## Behaviour
 
-> **Note:** Make sure to first implement the basic flow ([Flow 1: Basic implementation (recommended)](FLOW_BASIC.md)) before implementing this advanced flow.
+When customers create a payment, the payment link opens in a WKWebView to execute the payment. If necessary, the WKWebView launches other native apps to complete the payment.
 
-## Step 1: Creating the in-app browser ViewController
+The payment result returns through a deep link or a callback in the WKWebView. The app refreshes the payment statuses when it’s opened, to ensure the latest statuses are shown in case the payment result doesn’t return.
 
-Instead of launching the payment url in the basic flow, create a UIViewController that contains a WKWebView to load the url in.
+## Implementation
 
-## Step 2: Set WKWebView settings
+> :warning: **Note**: Before implementing the advanced flow, implement the basic flow and change `kPaymentFlow` to `.inAppBrowser` in [Settings.swift](Checkout/App/Settings.swift).
 
-Configure the delegate on the WKWebView:
+The advanced flow consists of the following steps:
+
+1.  [Create an in-app browser ViewController](#create-an-in-app-browser-viewcontroller).
+2.  [Configure the WKWebView settings](#configure-the-wkwebview-settings).
+3.  [Configure the WKWebView client callback](#configure-the-wkwebview-client-callback).
+4.  [Reload the payment status in the in-app browser ViewController](#reload-the-payment-status-in-the-in-app-browser-viewcontroller).
+
+> :warning: **Warning**: Incorrect implementation of the advanced flow can lead to payments not starting or incomplete payments due to universal linking issues.
+
+### Step 1: Create an in-app browser ViewController
+
+To replace launching the payment link in the basic implementation, create a UIViewController that contains a WKWebView to load the payment, such as [InAppBrowserViewController.swift](Checkout/Scenes/PaymentFlow/InAppBrowser/InAppBrowserViewController.swift).
+
+### Step 2: Configure the WKWebView settings
+
+Configure the delegate on the WKWebView.
 
 ```swift
 private func setupWebView() {
@@ -20,7 +37,9 @@ private func setupWebView() {
 }
 ```
 
-## Step 3: Configure the WKWebView client callback
+### Step 3: Configure the WKWebView client callback
+
+In the UIViewController, configure the WKWebView client to handle callbacks.
 
 ```swift
 extension InAppBrowserViewController: WKNavigationDelegate  {
@@ -46,11 +65,16 @@ extension InAppBrowserViewController: WKNavigationDelegate  {
 }
 ```
 
-> Note: There are various situations in the in-app browser flow where the user did not return to the app via the deeplink or callbacks.
+### Step 4: Reload the payment status in the in-app browser ViewController
 
-## Step 4: Reload status in in-app browser ViewController
+There are a number of situations where the customer doesn’t return to the app through a deep link or a callback. For example, when an external app is required to complete the payment, the external app calls the deep link to relaunch your app. In some cases, this is unsuccessful:
 
-Make sure to reload the payment status when opening the ViewController to detect whether the payment has been completed:
+-   iOS displays an alert to the customer when the browser opens a deep link. If the customer chooses to cancel, the deep link doesn't open after payment.
+-   If a payment takes place asynchronously, the customer must return to the app manually. The app opens the last screen, even if the payment is already complete.
+
+Therefore, it’s best practice to check whether the payment is complete when the customer returns to the app.
+
+To check whether the payment is complete, reload the payment status when the ViewController opens.
 
 ```swift
 override func viewDidLoad() {
@@ -63,11 +87,6 @@ override func viewDidLoad() {
 @objc func applicationWillEnterForeground(_ notification: Notification) {
     guard let paymentId = payment?.id else { return }
 
-    // Check if payment status changed and handle accordingly.
-    // When the browser opened an external app, the external app will call our deeplink to open the app again. However there are some caveats:
-    // 1. When iOS opens a deeplink, it will show an alert to the user. The user may have decided to click cancel here and therefore not opening the deeplink after doing the payment.
-    // 2. The payment may be done asynchronously and the user may manually return to the app. In this case this screen is still open while the payment might have already been finished.
-    // In conclusion it is a best practice to check the status of the payment when the user returns back to the app to make sure that this payment is not completed already.
     PaymentService.shared.getPayment(paymentId) { [weak self] result in
         switch result {
         case .success(let payment):
@@ -84,14 +103,10 @@ override func viewDidLoad() {
 }
 ```
 
-# Additions
+## Next steps
 
-After implementing the advanced flow, the following additions are available:
+After implementing the advanced flow, your app handles Mollie payments natively. You can extend this flow by [including payment method selection in your app](IMPLEMENT_PAYMENT_METHODS.md).
 
-- [Optional: Implement payment methods](IMPLEMENT_PAYMENT_METHODS.md)
+## Resources
 
-# Resources
-
-Related samples in Mollie Checkout:
-
-- [InAppBrowserViewController.swift](Checkout/Scenes/PaymentFlow/InAppBrowser/InAppBrowserViewController.swift): example ViewController with the WKWebView.
+Go to **Checkout** → **Scenes** → **PaymentFlow** → **InAppBrowser** for relevant sample files, such as [InAppBrowserViewController.swift](Checkout/Scenes/PaymentFlow/InAppBrowser/InAppBrowserViewController.swift), which provides an example UIViewController containing the WKWebView.

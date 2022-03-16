@@ -1,110 +1,110 @@
-# Source explained
+# About the source
+
+This page takes you through some of the source files you need to execute payments in your app.
 
 ## Setup
 
-The demo app uses a few libraries for simplicity:
+The demo app uses a number of libraries to simplify the setup.
 
-- [Cocoapods](): dependency manager in use.
-- [R.swift](): for type-safe usage of resources (colors, images, localized strings, storyboards etc.). Note that when building the project the `R.generated.swift` file will be generated for you.
-- [Nuke](): for loading remote images
+- [Cocoapods](https://cocoapods.org/) manages dependencies.
+- [R.swift](https://cocoapods.org/pods/R.swift) handles type-safe resources, such as colours, images, localised strings, storyboards, and so on. When you build the project, the `R.generated.swift` file is automatically generated.
+- [Nuke](https://kean.blog/nuke/home): loads remote images.
 
-Opening the project:
-
+To open the project, run the following commands.
 - `pod install`
 - `open Checkout.xcworkspace`
 
-## Settings
+## Configuration
 
-The demo app comes with a few configured settings in [Settings.swift](Checkout/App/Settings.swift). These settings can be modified to check out the flow when running the demo app.
+### Basic settings
 
-We recommend trying out the different options of the available settings when running the app to get a feeling about which flow is preferred in your case.
+You can modify the app’s basic settings in [Settings.swift](Checkout/App/Settings.swift).
 
-| Setting | Description |
-| ------- | ----------- |
-| `kBaseUrl` | The base url of the backend in use. |
-| `kSelectPaymentMethod` | Indicates whether to select the payment method directly when creating a payment. <br> This value defines how **creating** and **executing** the payment works in the demo app. |
-| `kPaymentFlow` | Defines the flow that is used when executing a payment. |
+-   `kBaseUrl` specifies the link used to communicate with your backend. This is needed to securely handle the API calls when executing the payment flow.
+-   `kSelectPaymentMethod` indicates whether to use a custom payment method selection step.
+    -   `false` means customers select the payment method in the browser when they execute the payment. 
+    -   `true` enables you to customise the payment method selection. Customers select the payment method in your app before executing the payment in the web.
+-   `kPaymentFlow` defines how to execute the payment.
+    -   `.choose` displays an alert for the customer to choose their preferred flow.
+    -   `.externalBrowser` uses the [basic implementation flow](FLOW_BASIC.md).
+    -   `.inAppBrowser` uses the [advanced implementation flow](FLOW_ADVANCED.md).
 
-## Networking
+> ✅  **Tip**: Run the app using different settings to discover your preferred implementation.
 
-In this demo app we use the standard URLRequest to communicate to the backend:
+### Network and backend calls
 
-- [NetworkHelper.swift](Checkout/Networking/NetworkHelper.swift): Network configuration
-- [PaymentsService.swift](Checkout/Networking/Services/PaymentsService.swift): Definitions of backend payment calls
-- [MethodsService.swift](Checkout/Networking/Services/MethodsService.swift): Definition of backend methods call
+The demo app uses [URLRequest](https://developer.apple.com/documentation/foundation/urlrequest) to communicate with the backend and execute the API calls needed for the payment flows.
 
-Within the ApiService there are 4 calls:
+ - [NetworkHelper.swift](Checkout/Networking/NetworkHelper.swift)
+   contains the configuration.
+ - [PaymentsService.swift](Checkout/Networking/Services/PaymentsService.swift)
+   contains the backend payment calls:
+	 - `PaymentsService.createPayment` creates a payment.
+	 - `PaymentsService.getPayments()` retrieves a list of payments.
+	 - `PaymentsService.getPayment(id)` retrieves the specified payment.
+ - [MethodsService.swift](Checkout/Networking/Services/MethodsService.swift)
+   contains the backend methods call:
+	 - `MethodsService.getActiveMethods()` retrieves the payment methods. Only applies when `kSelectPaymentMethod` is `true`.
 
-- `PaymentsService.createPayment(payment)`: Used to create a new payment.
-- `PaymentsService.getPayments()`: Used to retrieve the list of payments.
-- `PaymentsService.getPayment(id)`: Only used to retrieve a single payment.
-- `MethodsService.getActiveMethods()`: Only needed when `kSelectPaymentMethod` is `true`.
+## App functionalities
 
-# User flow
+The demo app uses various source files to handle its functionalities.
 
-## 1: Splash
+### Retrieve payments
 
-The [SplashViewController.swift](Checkout/Scenes/Splash/SplashViewController.swift) retrieves the payments list and proceeds when these are loaded.
+There are two files that the app uses to retrieve payments.
 
-## 2: List payments
+[SplashViewController.swift](Checkout/Scenes/Splash/SplashViewController.swift) displays a loading screen while it retrieves the payments list. When it’s finished loading, it displays the payments list.
+    
+[PaymentsViewController.swift](Checkout/Scenes/Payments/PaymentsViewController.swift) retrieves and displays the payments list.
 
-In [PaymentsViewController.swift](Checkout/Scenes/Payments/PaymentsViewController.swift) the payments are retrieved and shown.
+> :warning: **Note**: To ensure the latest payment statuses are shown, refresh the payments list in [PaymentsViewController.swift](Checkout/Scenes/Payments/PaymentsViewController.swift). This way, customers can see whether their payments were successful.
 
-> **Note:** Refreshing the payments list when the user returns to the app is recommended to make sure the user always sees the latest state of their payments.
+### Create payment
 
-## 3: Create payment
+The API call to create a payment requires a `description` and an `amount`. In general, these values are determined by the ordered item. For demonstration purposes, the customer provides these values in [CreatePaymentViewController.swift](Checkout/Scenes/CreatePayment/CreatePaymentViewController.swift).
 
-The bare minimum needed to create a payment is a `description` and the `amount`. Usually these values are determined based on what is being bought. For demonstration purposes, in [CreatePaymentViewController.swift](Checkout/Scenes/CreatePayment/CreatePaymentViewController.swift) the user provides these values.
+When the customer taps **Create**, the app continues to the select payment method step if `kSelectPaymentMethod` in [Settings.swift](Checkout/App/Settings.swift) is `true`. Otherwise, it saves the payment and proceeds to [the execution step](#execute-payment).
 
-Next when clicking **Create** button, the app continues depending on `kSelectPaymentMethod`:
+### Select payment method (optional)
 
-- When `true`, see [3A](#3a-optional-selecting-the-payment-method)
-- When `false`, see [3B](#3b-payment-saved)
+If you customise the payment selection step, the app continues to the payment method on **Create**.
 
-> **Note:** Selecting the payment method when creating the payment is completely optional. Creating a payment only with the `description` and `amount` will allow the user to select the payment method later when executing the payment.
+You can choose whether to display the payment methods and issuers in a list or a grid layout.
 
-### 3A Optional: Selecting the payment method
+-   [SelectPaymentViewController.swift](Checkout/Scenes/CreatePayment/SelectPaymentMethod/SelectPaymentViewController.swift) implements the payment method selection natively.
+-   [SelectIssuerViewController.swift](Checkout/Scenes/CreatePayment/SelectPaymentMethod/SelectIssuer/SelectIssuerViewController.swift) only applies when the customer selects a payment method through the grid layout.
 
-In [SelectPaymentViewController.swift](Checkout/Scenes/CreatePayment/SelectPaymentMethod/SelectPaymentViewController.swift) the payment method selection is implemented natively. In case the payment method has issuers, selecting the issuer is also required. When selecting **Continue**, the app proceeds to **3B**.
+### Execute payment
 
-The demo app provides a segment selection on top to switch between the list and grid layout for selecting the method and issuer. You can choose which layout is preferred in your app.
+The app executes the payment according to the `kPaymentFlow` in [Settings.swift](Checkout/App/Settings.swift).
 
-> **Note:** [SelectIssuerViewController.swift](Checkout/Scenes/CreatePayment/SelectPaymentMethod/SelectIssuer/SelectIssuerViewController.swift) is only used when using the grid layout.
+> :information_source: **Info**: The app contains the settings for both flows for demonstration purposes. You can also implement both flows and set `kPaymentFlow` to `.choose`. In this case, the app displays an alert that enables customers to choose whether to continue in the app or in their browser.
 
-### 3B: Payment saved
+#### Basic implementation
 
-The payment is saved with the values, proceeding to the next step: executing the payment.
+In the basic implementation, the payment link opens in an external browser on the customer’s device.
 
-## 4: Executing the payment
+To implement this flow, set `kPaymentFlow` to `.externalBrowser`.
 
-The demo app determines the payment flow based on `kPaymentFlow`:
+[PaymentFlowNavigation.swift](Checkout/Scenes/PaymentFlow/PaymentFlowNavigation.swift) contains the `openExternalBrowser()` method.
 
-- When `.externalBrowser`, see [4A](#4a-external-browser-flow)
-- When `.internalBrowser`, see [4B](#4b-in-app-browser-flow)
-- When `.choose`, see [4C](#4c-choose-flow)
+#### Advanced implementation
 
-### 4A: External browser flow
+In the advanced implementation, the payment link opens in a WKWebView inside the app.
 
-The url is opened via the external browser. Checkout the method `openExternalBrowser()` in [PaymentFlowNavigation.swift](Checkout/Scenes/PaymentFlow/PaymentFlowNavigation.swift).
+To implement this flow, set `kPaymentFlow` to `.inAppBrowser`.
 
-### 4B: In-app browser flow
+To access the WKWebView sample files, open **Checkout** → **Scenes** → **PaymentFlow** → **InAppBrowser**.
 
-The url is opened within a WKWebView inside [InAppBrowserViewController.swift](Checkout/Scenes/PaymentFlow/InAppBrowser/InAppBrowserViewController.swift). The WKWebView is configured to successfully handle the payment pages.
+[InAppBrowserViewController.swift](Checkout/Scenes/PaymentFlow/InAppBrowser/InAppBrowserViewController.swift) contains the configuration to successfully handle payment pages. The WKNavigationDelegate is used to handle callbacks from the WKWebView.
 
-The WKNavigationDelegate is used to handle the callbacks from the WKWebView. Overriding the `decidePolicy` method is **required** to handle called deeplinks from the WKWebView that should be opened in the native apps.
+> :warning: **Note**: You must override the `decidePolicy` to open deep links called from the WKWebView in native apps.
 
-### 4C: Choose flow
+### Handle payment result
 
-With this setting the app will show an alert, giving the user the choice to use the **5A: External browser flow** or the **5B: In-app browser flow**.
+[SceneDelegate.swift](Checkout/App/SceneDelegate.swift) handles the incoming deep link.
 
-## 5: Payment result
+[PaymentsViewController.swift](Checkout/Scenes/Payments/PaymentsViewController.swift) receives the deep link using the `PaymentsViewControllerDelegate.paymentCompleted` method, which is called by the SceneDelegate. It also reloads the payment when the user returns to the app, so that the latest payment statuses are displayed.
 
-In [SceneDelegate.swift](Checkout/App/SceneDelegate.swift) the incoming deeplink is being handled.
-
-The [PaymentsViewController.swift](Checkout/Scenes/Payments/PaymentsViewController.swift) receives the deeplink via the `PaymentsViewControllerDelegate.paymentCompleted` method, which is called by the SceneDelegate. 
-
-Also, the [PaymentsViewController.swift](Checkout/Scenes/Payments/PaymentsViewController.swift) reloads the payment when the user returns to the app to ensure that the latest state of the payments are shown.
-
-### 5A: In-app browser flow
-
-When using the in-app browser flow, the [InAppBrowserViewController.swift](Checkout/Scenes/PaymentFlow/InAppBrowser/InAppBrowserViewController.swift) also refreshes the state of the payment when the user returns to the app. This is because with the in-app browser flow, there are various cases where the payment is completed but did not return to that ViewController or to the app.
+In the advanced implementation, there are various cases in which a customer completes their payment but isn't returned to the ViewController or the app. [InAppBrowserViewController.swift](Checkout/Scenes/PaymentFlow/InAppBrowser/InAppBrowserViewController.swift) therefore also refreshes the payments, to show the latest statuses when the customer returns to the app.

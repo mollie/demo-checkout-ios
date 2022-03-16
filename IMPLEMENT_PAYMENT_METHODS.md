@@ -1,44 +1,37 @@
-# Optional: Implement payment methods
+# Including payment method selection
 
-Payment method selection can be implemented natively if wanted. This is completely optional because Mollie will request the payment method in web if the payment method isn't decided.
+When customers place an order in your app, they execute the payment in two steps:
 
-## Types
+1.  The customer selects the payment method, for example, iDEAL or credit card.
+2.  The customer completes the payment using a native app or by providing requested details.
 
-There are different types of payment types to implement, depending on the payment method:
+By default, Mollie handles both steps in the browser (external or in-app, depending on your chosen implementation). You can also add the payment method selection step to your app, so that it matches your app’s theme. In this case, customers select the payment method in your app and complete the payment through the browser.
 
-1. Issuer selection (e.g. _iDeal_ payments)
-2. Single selection (e.g. _PayPal_ payments)
-3. Additional input (e.g. _Credit card_ payments)
+| Web (default) | Native (optional) |
+| ------------- | ----------------- |
+| <p align="center"> <img src="images/FlowBasic.gif" alt="Payment method selection" width="70%" /> </p> | <p align="center"> <img src="images/FlowBasicWithMethodSelection.gif" alt="Payment method selection" width="70%" /> </p> |
 
-> **Note:** The available payment methods may vary based on the `amount` of the payment. Make sure to retrieve the payment methods via the backend along with the `amount` of the payment.
+## Implement method selection flows
 
-### 1. Issuer selection
+Implementing the payment method selection step in your app is completely optional. There are three different flows depending on the payment method.
 
-The payment method has multiple issuers of which one should be selected. Show the list of issuers to the user to select one.
+| Issuer selection | Single selection | Additional input |
+| ---------------- | ---------------- | ---------------- |
+| The payment method requires the customer to select an issuer. For example, iDEAL requires the customer to select a bank. To implement this flow, display the issuer list.<br><br><img src="images/FlowBasicWithMethodSelection.gif" alt="Payment method selection" width="200px" /> | The payment method doesn’t require additional input from the customer. For example, PayPal.<br><br><img src="images/FlowBasicWithMethodSelectionSingle.gif" alt="Payment method single selection" width="200px" /> | The payment method requires the customer to provide additional information. For example, providing credit card details when paying by credit card.<br><br>To request the additional information in your app, create input forms for each of these method types and display them to the user. Create the payment using the additional input.<br><br>Mollie Checkout for iOS currently doesn’t demonstrate this flow. Instead, when a payment is created using this method, the app uses Mollie’s website to request the additional input. |
 
-<img src="images/FlowBasicWithMethodSelection.gif" alt="Payment method selection" width="24%" />
+If you add the payment method selection step to your app, you should include the issuer and single selection flows. Including the additional input flow is optional.
 
-### 2. Single selection
+> :warning: **Note**: The available payment methods can vary depending on the payment `amount`. You must therefore retrieve the payment methods from the backend, together with the `amount`.
 
-The payment method has no issuers.
+## Display in a list or grid
 
-<img src="images/FlowBasicWithMethodSelectionSingle.gif" alt="Payment method single selection" width="24%" />
+In general, apps display payment methods (and issuers) in a list or a grid. The demo app provides both options so that you can decide which to implement, or leave it up to your customers to choose their preferred layout.
 
-### 3. Additional input
-
-The payment method allows additional input. Depending on the actual method, provide the additional inputs to the user and create the payment with these values.
-
-> **Note:** Mollie Checkout currently does not demonstrate this case. Instead, the app creates the payment with this method and causes the Mollie website to request the additional input.
-
-## Payment options
-
-# Resources
-
-[SelectPaymentViewController.swift](Checkout/Scenes/CreatePayment/SelectPaymentMethod/SelectPaymentViewController.swift) is an example where the user can choose between the list or grid layout:
-
-| List | List + issuers | Grid |
-|------|----------------|------|
+| List | List with issuers | Grid |
+|------|-------------------|------|
 | ![Select method - list](images/SelectMethodList.png "Select method - list") | ![Select method/issuer - list](images/SelectMethodListIssuer.png "Select method/issuer - list") | ![Select method - grid](images/SelectMethodGrid.png "Select method - grid") |
 
-> **Note:** Typically an app shows these in either a list or a grid, Mollie Checkout provides both options for demonstration purposes.
+## Example files
 
+Open **Checkout** → **Scenes** → **CreatePayment** → **SelectPaymentMethod** to access the sample files, such as 
+[SelectPaymentViewController.swift](Checkout/Scenes/CreatePayment/SelectPaymentMethod/SelectPaymentViewController.swift).
