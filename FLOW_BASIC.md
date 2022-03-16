@@ -1,42 +1,54 @@
+# Implementing the basic flow
+
 <img align="right" src="images/FlowBasic.gif" alt="Basic flow" width="24%" />
 
-# Flow 1: Basic implementation (recommended)
+The basic implementation is the same as executing a payment in the web, using a browser on the customer’s device.
 
-The basic implementation consists of creating and executing the payment and handling the result when the payment is completed.
+## Behaviour
 
-The payment url is being opened in an external browser handle the payment process.
+When customers create a payment in your app, they receive a payment link. The link launches an external browser on the device where the customer selects their payment method and completes the payment. Depending on the selected payment method, the device might launch a native app from the browser to complete the payment.
 
-## Step 1: Create payment
+After the payment is processed, a deep link takes the customer back to the app to see the payment result. The app refreshes the payments to show their latest statuses.
 
-The bare minimum needed to create a payment is a `description` and the `amount`. Usually these values are determined based on what is being bought.
+> ✅ **Tip**: We recommend this flow if you want to add Mollie payments to your app with minimum effort.
 
-Create a payment by executing the backend call which creates the payment with these values.
+## Implementation
 
-> **Note:** It is required define the `amount` of the payment in a safe environment (the backend). Mollie Checkout uses user input here only for demonstration purposes.
+The basic flow consists of the following steps:
 
-## Step 2: Executing payment
+1.  [Create a payment](#step-1-create-a-payment)
+2.  [Execute the payment](#step-2-execute-the-payment)
+3.  [Handle the completed payment](#step-3-handle-the-completed-payment)
+4.  [Refresh the payment status](#step-4-refresh-the-payment-status).
 
-After successfully creating the payment, the resulting payment object contains an `url`. This is the checkout url of the payment which should be opened for the user to execute the payment.
+### Step 1: Create a payment
 
-Open the `url` for the user:
+To create a payment, execute the backend call that creates a payment specifying a `description` and an `amount`.
+
+This returns a payment object which contains the URL needed to execute the payment.
+
+> ⚠️ **Note**: You must define the payment `amount` in a secure environment (the backend). Mollie Checkout for iOS only uses user input here for demonstration purposes.
+
+### Step 2: Execute the payment
+
+To navigate the customer to the checkout, open the URL from the create payment response.
 
 ```swift
 UIApplication.shared.open(paymentUrl)
 ```
 
-## Step 3: Handling the payment result
+### Step 3: Handle the completed payment
 
-Generally the payment result comes back via the deeplink that is configured by the backend when creating the payment.
+In general, the payment result returns through a [deep link](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) that is configured by the backend when the payment was created.
 
-Deeplinks are url's that have a custom scheme which can take users directly to a specific part of your app. To learn more about deeplinks, check out the [documentation](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app).
+The demo app uses `mollie-checkout` as its deep link.
 
-The demo app uses `mollie-checkout` as deeplink.
+To navigate customers back to your app after they complete their payment, follow the steps below.
 
-Start with defining the URL scheme for the deeplink. Go to _Project Settings_ > _Info_, and inside _URL Types_ add the URL scheme.
-
+1. To define the URL scheme for your deep link, go to **Project Settings** → **Info** and add the URL scheme under **URL Types**.
 <img src="images/SetupUrlScheme.png" alt="URL scheme definition" width="50%" />
 
-Next, in the SceneDelegate handle the incoming deeplink:
+2. Handle the incoming deep link in SceneDelegate.
 
 ```swift
 func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -54,8 +66,7 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     paymentsDelegate.paymentCompleted()
 }
 ```
-
-In the demo app the PaymentsViewController receives a callback via the delegate. Upon receiving the PaymentsViewController closes any presented modal, goes back to the root ViewController, and refreshes the full payments list:
+3.  When PaymentsViewController receives a callback through the delegate, close modals, return to the root ViewController, and refresh the full payments list.
 
 ```swift
 extension PaymentsViewController: PaymentsViewControllerDelegate {
@@ -68,11 +79,11 @@ extension PaymentsViewController: PaymentsViewControllerDelegate {
 }
 ```
 
-## Step 4: Refresh payment status
+### Step 4: Refresh the payment status
 
-It is recommended to refresh the payment(s) when the user returns to the app, because there are some cases where the user can successfully complete the payment while preventing the return via the deeplink.
+In some cases, customers can successfully complete their payment without returning to the app through the deep link. You should therefore refresh payments when customers return to the app, so that they see the latest statuses.
 
-Refresh the payments when the app enters foreground:
+Refresh the payments when the app enters the foreground.
 
 ```swift
 override func viewDidLoad() {
@@ -87,7 +98,7 @@ override func viewDidLoad() {
 }
 ```
 
-The payment status may have changed while navigating inside the app, so it's good to refresh the payments on `viewWillAppear`.
+We recommend refreshing the payments on `viewWillAppear()` as well, in case the payment status changes while the customer navigates inside the app.
 
 ```swift
 override func viewWillAppear(_ animated: Bool) {
@@ -96,11 +107,11 @@ override func viewWillAppear(_ animated: Bool) {
 }
 ```
 
-**Note: Using modals**
+#### Using modals
 
-Since iOS 13 UIViewControllers can also be presented modally, causing them to overlap the current UIViewController which remains visible behind it. 
+From iOS 13, you can present UIViewControllers in modals. They overlap the current UIViewController, which remains visible in the background.
 
-However, in this case `viewWillAppear()` is not being called when dismissing the modal. A way to overcome this is to implement the `UIAdaptivePresentationControllerDelegate`:
+In this case, `viewWillAppear()` isn't called when the modal is dismissed. You can implement `UIAdaptivePresentationControllerDelegate` to solve this.
 
 ```swift
 @IBAction func createTapped(_ sender: Any) {
@@ -117,7 +128,8 @@ extension PaymentsViewController: UIAdaptivePresentationControllerDelegate {
 }
 ```
 
-Yet, when closing the modal programmatically both the `viewWillAppear()` and `presentationControllerDidDismiss()` are not being called. In the demo app we call this manually when dismissing the modal:
+When the modal is closed programmatically, `viewWillAppear()` and `presentationControllerDidDismiss()` aren't called. To solve this, we call them manually when the modal is dismissed in the demo app.
+
 ```swift
 @IBAction func cancelTapped(_ sender: Any) {
     if let presentingPresentationController = presentingViewController?.presentationController {
@@ -127,17 +139,14 @@ Yet, when closing the modal programmatically both the `viewWillAppear()` and `pr
 }
 ```
 
-# Additions
+## Next steps
 
-After implementing the base flow, the following additions are available:
+After implementing the basic flow, your app can handle Mollie payments using an external browser. You can further customise this flow through two additional implementations:
+-   [Including payment method selection](IMPLEMENT_PAYMENT_METHODS.md) in your app.  
+-   [Implement the advanced flow](FLOW_ADVANCED.md) to handle payments in a customisable in-app browser.
 
-- [Flow 2: Advanced implementation](FLOW_ADVANCED.md)
-- [Optional: Implement payment methods](IMPLEMENT_PAYMENT_METHODS.md)
+## Resources
 
-# Resources
-
-Related samples in Mollie Checkout:
-
-- [PaymentsViewController.swift](Checkout/Scenes/Payments/PaymentsViewController.swift): refreshing payments & handling the return of a completed payment.
-- [CreatePaymentViewController.swift](Checkout/Scenes/CreatePayment/CreatePaymentViewController.swift): creation of the payment.
-
+Refer to the following source files for relevant samples:
+-   [PaymentsViewController.swift](Checkout/Scenes/Payments/PaymentsViewController.swift): refresh payments and handle a completed payment.
+-   [CreatePaymentViewController.swift](Checkout/Scenes/CreatePayment/CreatePaymentViewController.swift): create a payment.
