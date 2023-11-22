@@ -1,5 +1,5 @@
 import UIKit
-import Nuke
+import NukeExtensions
 
 class SelectPaymentTableViewCell: UITableViewCell {
 
@@ -32,7 +32,7 @@ class SelectPaymentTableViewCell: UITableViewCell {
         // Setup common attributes
         titleLabel.text = item.selectableItem.title
         if let url = URL(string: item.selectableItem.image.size2x) {
-            Nuke.loadImage(with: url, into: iconImageView)
+            NukeExtensions.loadImage(with: url, into: iconImageView)
         }
         
         // Setup CheckoutItem specific attributes

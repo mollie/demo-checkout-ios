@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		547ACE298660944968AA7ED0 /* Pods_Checkout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2815A19ABD16430E54A1E1FC /* Pods_Checkout.framework */; };
 		EA5D5EC126C3AA6A008FCCD0 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5D5EC026C3AA6A008FCCD0 /* Payment.swift */; };
 		EA5D5EC426C3B2BC008FCCD0 /* CreatePayment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA5D5EC326C3B2BC008FCCD0 /* CreatePayment.storyboard */; };
 		EA5D5EC626C3B2CE008FCCD0 /* CreatePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5D5EC526C3B2CE008FCCD0 /* CreatePaymentViewController.swift */; };
@@ -22,6 +21,7 @@
 		EA5D5EDE26C3D622008FCCD0 /* SelectPaymentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5D5EDC26C3D622008FCCD0 /* SelectPaymentCollectionViewCell.swift */; };
 		EA5D5EDF26C3D622008FCCD0 /* SelectPaymentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA5D5EDD26C3D622008FCCD0 /* SelectPaymentCollectionViewCell.xib */; };
 		EA5D5EE126C500B0008FCCD0 /* CheckoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5D5EE026C500B0008FCCD0 /* CheckoutItem.swift */; };
+		EA608CFD2AE7E4C600994B6B /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = EA608CFC2AE7E4C600994B6B /* RswiftLibrary */; };
 		EA6458DF26C2842800E7C136 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6458DE26C2842800E7C136 /* AppDelegate.swift */; };
 		EA6458E126C2842800E7C136 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6458E026C2842800E7C136 /* SceneDelegate.swift */; };
 		EA6458E326C2842800E7C136 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6458E226C2842800E7C136 /* SplashViewController.swift */; };
@@ -37,7 +37,6 @@
 		EAAF18CB26C6924000F7031C /* MollieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAF18CA26C6924000F7031C /* MollieResponse.swift */; };
 		EAAF18CF26C6B81300F7031C /* Double+toCurrencyString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAF18CE26C6B81300F7031C /* Double+toCurrencyString.swift */; };
 		EAB5444A26C2B01800B7D0B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB5444926C2B01800B7D0B7 /* Assets.xcassets */; };
-		EAB5444C26C2B2B600B7D0B7 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5444B26C2B2B600B7D0B7 /* R.generated.swift */; };
 		EAB5445326C2B5AF00B7D0B7 /* MethodsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5445226C2B5AF00B7D0B7 /* MethodsService.swift */; };
 		EAB5445526C2B61B00B7D0B7 /* PaymentsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5445426C2B61B00B7D0B7 /* PaymentsService.swift */; };
 		EAB5445A26C2B68D00B7D0B7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5445926C2B68D00B7D0B7 /* UserDefaultsManager.swift */; };
@@ -56,6 +55,8 @@
 		EADEE86B26C5625600E858BB /* MollieAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EADEE86A26C5625600E858BB /* MollieAlert.storyboard */; };
 		EADEE86D26C5626700E858BB /* MollieAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADEE86C26C5626700E858BB /* MollieAlertViewController.swift */; };
 		EADEE86F26C56BA800E858BB /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADEE86E26C56BA800E858BB /* Buttons.swift */; };
+		EAE8BC452AE91E1700D8ED2B /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = EAE8BC442AE91E1700D8ED2B /* Nuke */; };
+		EAE8BC472AE91E1700D8ED2B /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = EAE8BC462AE91E1700D8ED2B /* NukeExtensions */; };
 		EAF2D74726D3734A007979A3 /* CheckoutSelectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2D74626D3734A007979A3 /* CheckoutSelectable.swift */; };
 		EAF2D74926D3C07E007979A3 /* MollieAlertConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2D74826D3C07E007979A3 /* MollieAlertConfig.swift */; };
 		EAF2D74C26D3C4A2007979A3 /* PaymentFlowNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2D74B26D3C4A2007979A3 /* PaymentFlowNavigation.swift */; };
@@ -63,9 +64,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2815A19ABD16430E54A1E1FC /* Pods_Checkout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Checkout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		50A0F4B05D99444AF649E987 /* Pods-Checkout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Checkout.debug.xcconfig"; path = "Target Support Files/Pods-Checkout/Pods-Checkout.debug.xcconfig"; sourceTree = "<group>"; };
-		622F34F893F36C675E929221 /* Pods-Checkout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Checkout.release.xcconfig"; path = "Target Support Files/Pods-Checkout/Pods-Checkout.release.xcconfig"; sourceTree = "<group>"; };
 		EA5D5EC026C3AA6A008FCCD0 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		EA5D5EC326C3B2BC008FCCD0 /* CreatePayment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePayment.storyboard; sourceTree = "<group>"; };
 		EA5D5EC526C3B2CE008FCCD0 /* CreatePaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePaymentViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 		EAAF18CA26C6924000F7031C /* MollieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MollieResponse.swift; sourceTree = "<group>"; };
 		EAAF18CE26C6B81300F7031C /* Double+toCurrencyString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+toCurrencyString.swift"; sourceTree = "<group>"; };
 		EAB5444926C2B01800B7D0B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EAB5444B26C2B2B600B7D0B7 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		EAB5445226C2B5AF00B7D0B7 /* MethodsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsService.swift; sourceTree = "<group>"; };
 		EAB5445426C2B61B00B7D0B7 /* PaymentsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsService.swift; sourceTree = "<group>"; };
 		EAB5445926C2B68D00B7D0B7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -120,7 +117,6 @@
 		EAF2D74826D3C07E007979A3 /* MollieAlertConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MollieAlertConfig.swift; sourceTree = "<group>"; };
 		EAF2D74B26D3C4A2007979A3 /* PaymentFlowNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowNavigation.swift; sourceTree = "<group>"; };
 		EAF2D74E26D3EFCA007979A3 /* RelativeDateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeDateFormatterService.swift; sourceTree = "<group>"; };
-		ED3933BAA4AF1D9173369D09 /* Pods-Checkout.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Checkout.alpha.xcconfig"; path = "Target Support Files/Pods-Checkout/Pods-Checkout.alpha.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,31 +124,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				547ACE298660944968AA7ED0 /* Pods_Checkout.framework in Frameworks */,
+				EAE8BC452AE91E1700D8ED2B /* Nuke in Frameworks */,
+				EAE8BC472AE91E1700D8ED2B /* NukeExtensions in Frameworks */,
+				EA608CFD2AE7E4C600994B6B /* RswiftLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0270D42D93FDEC56AA2C670B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2815A19ABD16430E54A1E1FC /* Pods_Checkout.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B79156CA818757215DC16A17 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				50A0F4B05D99444AF649E987 /* Pods-Checkout.debug.xcconfig */,
-				622F34F893F36C675E929221 /* Pods-Checkout.release.xcconfig */,
-				ED3933BAA4AF1D9173369D09 /* Pods-Checkout.alpha.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		EA5D5EC226C3B22B008FCCD0 /* CreatePayment */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,8 +198,7 @@
 				EA6458DD26C2842800E7C136 /* Checkout */,
 				EA6458F326C2872200E7C136 /* Resources */,
 				EA6458DC26C2842800E7C136 /* Products */,
-				B79156CA818757215DC16A17 /* Pods */,
-				0270D42D93FDEC56AA2C670B /* Frameworks */,
+				EAA0027C2AEA51D9006DA62E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -248,7 +227,6 @@
 			children = (
 				EA6458F426C2873000E7C136 /* Colors.xcassets */,
 				EAB5444926C2B01800B7D0B7 /* Assets.xcassets */,
-				EAB5444B26C2B2B600B7D0B7 /* R.generated.swift */,
 				EA5D5EC726C3BBCA008FCCD0 /* Localization.strings */,
 			);
 			path = Resources;
@@ -260,6 +238,13 @@
 				EA9AFFEF26CF93C5005E6B54 /* SelectIssuerViewController.swift */,
 			);
 			path = SelectIssuer;
+			sourceTree = "<group>";
+		};
+		EAA0027C2AEA51D9006DA62E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		EAB5444D26C2B46800B7D0B7 /* Scenes */ = {
@@ -422,18 +407,21 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EA6458EF26C2842900E7C136 /* Build configuration list for PBXNativeTarget "Checkout" */;
 			buildPhases = (
-				0D3D2B5A19BB6EE19D5922D8 /* [CP] Check Pods Manifest.lock */,
-				EA6458F226C284B100E7C136 /* R.swift */,
 				EA6458D726C2842800E7C136 /* Sources */,
 				EA6458D826C2842800E7C136 /* Frameworks */,
 				EA6458D926C2842800E7C136 /* Resources */,
-				EC1FEF1C0C52B4E11428CBB2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EA608D012AE7E56600994B6B /* PBXTargetDependency */,
 			);
 			name = Checkout;
+			packageProductDependencies = (
+				EA608CFC2AE7E4C600994B6B /* RswiftLibrary */,
+				EAE8BC442AE91E1700D8ED2B /* Nuke */,
+				EAE8BC462AE91E1700D8ED2B /* NukeExtensions */,
+			);
 			productName = Checkout;
 			productReference = EA6458DB26C2842800E7C136 /* MOL Debug.app */;
 			productType = "com.apple.product-type.application";
@@ -444,8 +432,9 @@
 		EA6458D326C2842800E7C136 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					EA6458DA26C2842800E7C136 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -461,6 +450,10 @@
 				Base,
 			);
 			mainGroup = EA6458D226C2842800E7C136;
+			packageReferences = (
+				EA608CFB2AE7E4C600994B6B /* XCRemoteSwiftPackageReference "R" */,
+				EAE8BC432AE91E1700D8ED2B /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			productRefGroup = EA6458DC26C2842800E7C136 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -491,68 +484,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0D3D2B5A19BB6EE19D5922D8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Checkout-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EA6458F226C284B100E7C136 /* R.swift */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$TEMP_DIR/rswift-lastrun",
-			);
-			name = R.swift;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				$SRCROOT/R.generated.swift,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
-		};
-		EC1FEF1C0C52B4E11428CBB2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Checkout/Pods-Checkout-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Checkout/Pods-Checkout-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Checkout/Pods-Checkout-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EA6458D726C2842800E7C136 /* Sources */ = {
@@ -592,7 +523,6 @@
 				EA6458DF26C2842800E7C136 /* AppDelegate.swift in Sources */,
 				EA6458E126C2842800E7C136 /* SceneDelegate.swift in Sources */,
 				EADEE86D26C5626700E858BB /* MollieAlertViewController.swift in Sources */,
-				EAB5444C26C2B2B600B7D0B7 /* R.generated.swift in Sources */,
 				EAB5446626C2C2BD00B7D0B7 /* NetworkError.swift in Sources */,
 				EA5D5ED126C3CB69008FCCD0 /* SelectPaymentViewController.swift in Sources */,
 				EAF2D74926D3C07E007979A3 /* MollieAlertConfig.swift in Sources */,
@@ -603,6 +533,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA608D012AE7E56600994B6B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = EA608D002AE7E56600994B6B /* RswiftGenerateInternalResources */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EA6458E926C2842900E7C136 /* LaunchScreen.storyboard */ = {
@@ -653,6 +590,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -714,6 +652,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -734,23 +673,26 @@
 		};
 		EA6458F026C2842900E7C136 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50A0F4B05D99444AF649E987 /* Pods-Checkout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon Debug";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_STANDALONE_ICON_BEHAVIOR = default;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DEC5EH4254;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = DEC5EH4254;
 				INFOPLIST_FILE = Checkout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mollie.checkout.debug;
 				PRODUCT_NAME = "MOL Debug";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.mollie.checkout.debug";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.mollie.checkout.debug";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -758,23 +700,26 @@
 		};
 		EA6458F126C2842900E7C136 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 622F34F893F36C675E929221 /* Pods-Checkout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_STANDALONE_ICON_BEHAVIOR = default;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DEC5EH4254;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = DEC5EH4254;
 				INFOPLIST_FILE = Checkout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mollie.checkout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.mollie.checkout";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.mollie.checkout";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -817,6 +762,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -843,25 +789,28 @@
 		};
 		EAB408D226C2A17B0035EE25 /* Alpha */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED3933BAA4AF1D9173369D09 /* Pods-Checkout.alpha.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon Alpha";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_STANDALONE_ICON_BEHAVIOR = default;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = DEC5EH4254;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = DEC5EH4254;
 				INFOPLIST_FILE = Checkout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mollie.checkout.alpha;
 				PRODUCT_NAME = "MOL Alpha";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.mollie.checkout.alpha";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc com.mollie.checkout.alpha";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -891,6 +840,47 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EA608CFB2AE7E4C600994B6B /* XCRemoteSwiftPackageReference "R" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.4.0;
+			};
+		};
+		EAE8BC432AE91E1700D8ED2B /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.1.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EA608CFC2AE7E4C600994B6B /* RswiftLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA608CFB2AE7E4C600994B6B /* XCRemoteSwiftPackageReference "R" */;
+			productName = RswiftLibrary;
+		};
+		EA608D002AE7E56600994B6B /* RswiftGenerateInternalResources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "plugin:RswiftGenerateInternalResources";
+		};
+		EAE8BC442AE91E1700D8ED2B /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAE8BC432AE91E1700D8ED2B /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		EAE8BC462AE91E1700D8ED2B /* NukeExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAE8BC432AE91E1700D8ED2B /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeExtensions;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EA6458D326C2842800E7C136 /* Project object */;
 }

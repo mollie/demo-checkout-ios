@@ -24,8 +24,7 @@ class SplashViewController: UIViewController {
     
     func presentPaymentsController(with payments: [Payment]) {
         DispatchQueue.main.async { [weak self] in
-            let storyboard = R.storyboard.payments()
-            let navigationVC = storyboard.instantiateInitialViewController { coder -> PaymentsViewController? in
+            let navigationVC = R.storyboard.payments.instantiateInitialViewController { coder -> PaymentsViewController? in
                 PaymentsViewController(coder: coder, payments: payments)
             }
             

@@ -98,10 +98,9 @@ DerivedData/
 
 # End of https://www.gitignore.io/api/xcode,macos,fastlane,cocoapods
 
-R.generated.swift
-
 # Internal
 
+Resources/GoogleService-Info.*.plist
 .gitlab-ci.yml
 fastlane/
 Gemfile
