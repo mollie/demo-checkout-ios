@@ -151,12 +151,10 @@ class SelectPaymentViewController: UIViewController {
     @IBAction func continueTapped(_ sender: Any) {
         switch (selectedViewingOption, dataSource.selectedMethod) {
         case (.collectionView, .some(let method)) where method.hasIssuers:
-            let storyboard = R.storyboard.createPayment()
-            let identifier = R.storyboard.createPayment.selectIssuerCollectionViewController.identifier
-            let vc = storyboard.instantiateViewController(identifier: identifier, creator: { [weak self] coder -> SelectIssuerViewController? in
+            let vc = R.storyboard.createPayment.selectIssuerCollectionViewController { [weak self] coder -> SelectIssuerViewController? in
                 guard let self = self else { return nil }
                 return SelectIssuerViewController(coder: coder, method: method, productInfo: self.selectedProduct)
-            })
+            }!
             navigationController?.pushViewController(vc, animated: true)
         default:
             PaymentService.shared.createPayment(

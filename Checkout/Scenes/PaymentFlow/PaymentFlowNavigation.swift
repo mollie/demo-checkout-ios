@@ -18,33 +18,28 @@ class PaymentFlowNavigation {
         case (.inAppBrowser, let status) where status == .open:
             openInAppBrowser()
         case (.choose, let status) where status == .open:
-            let storyboard = R.storyboard.mollieAlert()
-            let identifier = R.storyboard.mollieAlert.customAlertViewController.identifier
-            let alertVC = storyboard.instantiateViewController(identifier: identifier, creator: { coder -> MollieAlertViewController? in
+            let alertVC = R.storyboard.mollieAlert.customAlertViewController { coder -> MollieAlertViewController? in
                 MollieAlertViewController(
                     coder: coder,
                     options: MollieAlertConfig.chooseBrowser,
                     delegate: self
                 )
-            })
+            }!
 
             controller.present(alertVC, animated: false, completion: nil)
         case (_, let status) where status != .open:
-            let storyboard = R.storyboard.mollieAlert()
-            let identifier = R.storyboard.mollieAlert.customAlertViewController.identifier
-            
             let config = MollieAlertConfig(
                 title: R.string.localization.payment_status_title(),
                 description: R.string.localization.payment_status_description(selectedPayment.status.rawValue),
                 primaryButton: .ok)
             
-            let alertVC = storyboard.instantiateViewController(identifier: identifier) { coder -> MollieAlertViewController? in
+            let alertVC = R.storyboard.mollieAlert.customAlertViewController { coder -> MollieAlertViewController? in
                 MollieAlertViewController(
                     coder: coder,
                     options: config,
                     delegate: self
                 )
-            }
+            }!
             controller.present(alertVC, animated: false, completion: nil)
         default: break
         }
@@ -66,9 +61,7 @@ class PaymentFlowNavigation {
     }
     
     private func openInAppBrowser() {
-        let storyboard = R.storyboard.inAppBrowser()
-
-        guard let inAppBrowserVC = storyboard.instantiateInitialViewController(creator: { coder -> InAppBrowserViewController? in
+        guard let inAppBrowserVC = R.storyboard.inAppBrowser.instantiateInitialViewController(creator: { coder -> InAppBrowserViewController? in
             InAppBrowserViewController(coder: coder, payment: self.selectedPayment)
         }) else { return }
         

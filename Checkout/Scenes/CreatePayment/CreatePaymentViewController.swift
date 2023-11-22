@@ -46,11 +46,9 @@ class CreatePaymentViewController: UITableViewController {
         guard let productInfo = getProductInfo() else { return }
         
         if kSelectPaymentMethod {
-            let storyboard = R.storyboard.createPayment()
-            let identifier = R.storyboard.createPayment.selectPaymentViewController.identifier
-            let selectPaymentVC = storyboard.instantiateViewController(identifier: identifier) { coder -> SelectPaymentViewController? in
+            let selectPaymentVC = R.storyboard.createPayment.selectPaymentViewController { coder in
                 SelectPaymentViewController(coder: coder, selectedProduct: productInfo)
-            }
+            }!
             navigationController?.pushViewController(selectPaymentVC, animated: true)
         } else {
             createPayment(from: productInfo) { result in
@@ -114,14 +112,12 @@ private extension CreatePaymentViewController {
     
     func presentAlert(with alertConfig: MollieAlertConfig) {
         view.endEditing(true)
-        let storyboard = R.storyboard.mollieAlert()
-        let identifier = R.storyboard.mollieAlert.customAlertViewController.identifier
-        let alertVC = storyboard.instantiateViewController(identifier: identifier) { coder -> MollieAlertViewController? in
+        let alertVC = R.storyboard.mollieAlert.customAlertViewController { coder -> MollieAlertViewController? in
             MollieAlertViewController(
                 coder: coder,
                 options: alertConfig,
                 delegate: nil)
-        }
+        }!
         present(alertVC, animated: false, completion: nil)
     }
 }
